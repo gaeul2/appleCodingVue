@@ -1,10 +1,21 @@
 <template>
+  <div class="black-bg" v-if="modalVisible === true">
+    <div class="white-bg">
+      <h4>상세페이지임</h4>
+      <p>상세페이지 내용임</p>
+      <button @click="hideModal">닫기</button>
+    </div>
+  </div>
+
+
   <div class="menu">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
   </div>
   원룸샵
   <div v-for="(product, i) in products" :key="product">
-    <h4>{{i + 1 }}번째 매물 : {{product.title}}</h4>
+<!--    <img src="./assets/images/room{{i}}.jpg" class="room-img"/>-->
+    <img src="./assets/images/room0.jpg" class="room-img"/>
+    <h4 @click="showModal">{{i + 1 }}번째 매물 : {{product.title}}</h4>
     <p :style="스타일">{{product.price}} <span :style="검정">만원</span></p>
     <button @click="addNumber(i)">허위매물신고</button> <span>신고수 : {{ products[i].신고수 }}</span>
   </div>
@@ -17,11 +28,12 @@
 <!--  <div>-->
 <!--    <h4>{{products[1].title}}</h4>-->
 <!--    <p :style="스타일">{{products[1].price}} <span :style="검정">만원</span></p>-->
-<!--    <button @click="addNumber">허위매물신고</button> <span>신고수 : {{ 신고수 }}</span>-->
+<!--    <button @click="addNumber">허위매물신고</button> <span>신고수 : {{ products[1].신고수}}</span>-->
 <!--  </div>-->
 <!--  <div>-->
 <!--    <h4>{{products[2].title}}</h4>-->
 <!--    <p :style="스타일">{{products[2].price}} <span :style="검정">만원</span></p>-->
+<!--    <button @click="addNumber">허위매물신고</button> <span>신고수 : {{ products[2].신고수}}</span>-->
 <!--  </div>-->
 </template>
 
@@ -38,12 +50,19 @@ export default {
       products : [ {'title' : '역삼동원룸', 'price' : 60, '신고수': 0}, {'title' :'천호동원룸', 'price' : 70, '신고수': 0}, {'title' :'마포구원룸', 'price' : 80, '신고수': 0 }],
       price3: 80,
       메뉴들 : ['Home', 'Shop', 'About'],
+      modalVisible : false,
     }
   },
   methods : {
     addNumber(index){
       this.products[index].신고수++;
       alert((index + 1)  + "번째 매물이 신고되었습니다.");
+    },
+    showModal(){
+      this.modalVisible = true;
+    },
+    hideModal(){
+      this.modalVisible = false;
     }
   },
   components : {
@@ -52,6 +71,26 @@ export default {
 </script>
 
 <style>
+  body{
+    margin : 0
+  }
+  div{
+    box-sizing: border-box;
+  }
+  .black-bg{
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed; padding: 20px;
+  }
+  .white-bg{
+    width: 100%; background: white;
+    border-radius: 8px;
+    position: fixed; padding: 20px;
+  }
+  .room-img{
+    width: 100%;
+    margin-top: 40px;
+  }
   #app{
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
