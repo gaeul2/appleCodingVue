@@ -1,8 +1,14 @@
 <template>
   <div class="black-bg" v-if="modalVisible === true">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>{{ modalContent }}</p>
+<!--      <h4>{{ modalTitle }}</h4>-->
+<!--      <p>{{ modalContent }}</p>-->
+      <h4>{{ products[number].title }}</h4>
+      <div >
+        <img :src="products[number].image" style="width: 80%">
+      </div>
+      <p>{{ products[number].content }}</p>
+      <p>가격 : {{ products[number].price }}</p>
       <button @click="hideModal">닫기</button>
     </div>
   </div>
@@ -39,6 +45,8 @@ export default {
       메뉴들 : ['Home', 'Shop', 'About'],
       modalVisible : false,
       modalContent : '',
+      modalTitle : '',
+      number : 0,
     }
   },
   methods : {
@@ -49,9 +57,14 @@ export default {
     showModal(index){
       this.modalVisible = true;
       this.modalContent = productInfo[index].content;
+      this.modalTitle = productInfo[index].title;
+      this.number = index;
     },
     hideModal(){
       this.modalVisible = false;
+      this.modalContent = '';
+      this.modalTitle = '';
+      this.number = 0;
     }
   },
   components : {
