@@ -1,23 +1,24 @@
 <template>
-  <div class="black-bg" v-if="modalVisible === true">
-    <div class="white-bg">
-<!--      <h4>{{ modalTitle }}</h4>-->
-<!--      <p>{{ modalContent }}</p>-->
-      <h4>{{ products[number].title }}</h4>
-      <div >
-        <img :src="products[number].image" style="width: 80%">
-      </div>
-      <p>{{ products[number].content }}</p>
-      <p>가격 : {{ products[number].price }}</p>
-      <button @click="hideModal">닫기</button>
-    </div>
-  </div>
-
+<!--  <div class="black-bg" v-if="modalVisible === true">-->
+<!--    <div class="white-bg">-->
+<!--      <h4>{{ products[number].title }}</h4>-->
+<!--      <div >-->
+<!--        <img :src="products[number].image" style="width: 80%">-->
+<!--      </div>-->
+<!--      <p>{{ products[number].content }}</p>-->
+<!--      <p>가격 : {{ products[number].price }}원</p>-->
+<!--      <Discount/>-->
+<!--      <button @click="hideModal">닫기</button>-->
+<!--    </div>-->
+<!--  </div>-->
+  <modal1/>
 
   <div class="menu">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
   </div>
+
   원룸샵
+  <Discount/>
   <div v-for="(product, i) in products" :key="product">
 <!--    <img :src="'./assets/images/room',i,'.jpg'" class="room-img"/>-->
     <img :src="product.image" class="room-img"/>
@@ -31,6 +32,8 @@
 //export dafault로 가져온건 변수명 굳이 안맞춰도 됨
 // import data from "@/data/oneroom.js";
 import {productInfo} from "@/data/oneroom.js";
+import Discount from "@/components/Discount.vue";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name : 'App',
@@ -68,6 +71,8 @@ export default {
     }
   },
   components : {
+    Discount,
+    modal1 : Modal,
   }
 }
 </script>
@@ -78,6 +83,12 @@ export default {
   }
   div{
     box-sizing: border-box;
+  }
+  .discount{
+    background : #eee;
+    padding:10px;
+    margin:10px;
+    border-radius: 5px;
   }
   .black-bg{
     width: 100%; height: 100%;
