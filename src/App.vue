@@ -9,9 +9,7 @@
   원룸샵
   <Discount/>
 
-  <div v-for="i in products.length" :key="i">
-    <Card :product="products[i]" :number="i"/>
-  </div>
+    <Card v-for="(product,i) in products" :key="i" :product="product" :number="i"/>
 
 
 
