@@ -1,9 +1,21 @@
 <script>
 import Discount from "@/components/Discount.vue";
+import {productInfo} from "@/data/oneroom.js";
+import app from "@/App.vue";
 
 export default {
   name: "Modal",
-  components: {Discount}
+  computed: {
+    app() {
+      return app
+    }
+  },
+  components: {Discount},
+  props:{
+    products : Object,
+    number : Number,
+    modalVisible : Boolean
+  }
 }
 </script>
 
@@ -17,7 +29,7 @@ export default {
       <p>{{ products[number].content }}</p>
       <p>가격 : {{ products[number].price }}원</p>
       <Discount/>
-      <button @click="hideModal">닫기</button>
+      <button @click="app.method.hideModal()">닫기</button>
     </div>
   </div>
 </template>

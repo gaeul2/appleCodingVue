@@ -1,17 +1,6 @@
 <template>
-<!--  <div class="black-bg" v-if="modalVisible === true">-->
-<!--    <div class="white-bg">-->
-<!--      <h4>{{ products[number].title }}</h4>-->
-<!--      <div >-->
-<!--        <img :src="products[number].image" style="width: 80%">-->
-<!--      </div>-->
-<!--      <p>{{ products[number].content }}</p>-->
-<!--      <p>가격 : {{ products[number].price }}원</p>-->
-<!--      <Discount/>-->
-<!--      <button @click="hideModal">닫기</button>-->
-<!--    </div>-->
-<!--  </div>-->
-  <modal1/>
+
+  <modal1 :products="products" :number="number" :modalVisible="modalVisible"/>
 
   <div class="menu">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
@@ -19,13 +8,14 @@
 
   원룸샵
   <Discount/>
-  <div v-for="(product, i) in products" :key="product">
-<!--    <img :src="'./assets/images/room',i,'.jpg'" class="room-img"/>-->
-    <img :src="product.image" class="room-img"/>
-    <h4 @click="showModal(i)">{{i + 1 }}번째 매물 : {{product.title}}</h4>
-    <p :style="스타일">{{product.price}} <span :style="검정">만원</span></p>
-    <button @click="addNumber(i)">허위매물신고</button> <span>신고수 : {{ products[i].reportCnt }}</span>
+
+  <div v-for="i in products.length" :key="i">
+    <Card :product="products[i]" :number="i"/>
   </div>
+
+
+
+<!--  <Card :products="products" />-->
 </template>
 
 <script>
@@ -34,6 +24,7 @@
 import {productInfo} from "@/data/oneroom.js";
 import Discount from "@/components/Discount.vue";
 import Modal from "@/components/Modal.vue";
+import Card from "@/components/Card.vue";
 
 export default {
   name : 'App',
@@ -71,6 +62,7 @@ export default {
     }
   },
   components : {
+    Card,
     Discount,
     modal1 : Modal,
   }
