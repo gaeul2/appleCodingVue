@@ -1,6 +1,7 @@
 <template>
 
-  <modal1 @close="hideModal()" :products="products" :number="number" :modalVisible="modalVisible"/>
+  <modal1 @closeModal="hideModal()" :products="products" :number="number" :modalVisible="modalVisible"
+          @month="multiply($event)"/>
 
   <div class="menu">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
@@ -61,6 +62,9 @@ export default {
       this.modalContent = '';
       this.modalTitle = '';
       this.number = 0;
+    },
+    multiply(test){
+      this.products[test.index(1)].price *= test.index(0)
     }
   },
   components : {
