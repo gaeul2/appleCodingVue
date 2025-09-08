@@ -19,12 +19,13 @@ export default {
   data(){
     return {
       month : 1,
+      originPrice : this.products[this.number].price
     }
   },
   methods : {
-    sendMonth(month, idx){
+    sendMonth(month){
       this.month = month;
-      this.$emit('month', month, 'number', idx)
+      this.$emit('dataMonth-idx', {month : month, idx : this.number, oriPrice : this.originPrice})
     }
   }
 }
@@ -40,7 +41,7 @@ export default {
       <p>{{ products[number].content }}</p>
 
 <!--      <input @input="month = $event.target.value">-->
-      <input v-model.number="month">
+<!--      <input v-model.number="month">-->
 <!--      <textarea v-model="month"></textarea>-->
 <!--      <select v-model="month">-->
 <!--        <option>1</option>-->
@@ -48,8 +49,9 @@ export default {
 <!--        <option>3</option>-->
 <!--      </select>-->
 <!--      <input type="checkbox" v-model="month"/>-->
-      <!--      <input @input="sendMonth($event.target.value, number)">-->
-      <p> {{ month }}개월 선택함 : {{ products[number].price * month}}원</p>
+            <input @input="sendMonth($event.target.value)">
+      <p> {{ month }}개월 선택함 : {{ products[number].price}}원</p>
+<!--      <p> {{ month }}개월 선택함 : {{ products[number].price * month}}원</p>-->
 
       <Discount/>
       <button @click="$emit('closeModal')">닫기</button>
