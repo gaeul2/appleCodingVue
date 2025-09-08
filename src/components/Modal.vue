@@ -29,7 +29,7 @@ export default {
       <p>{{ products[number].content }}</p>
       <p>가격 : {{ products[number].price }}원</p>
       <Discount/>
-      <button @click="app.method.hideModal()">닫기</button>
+      <button @click="$emit('close')">닫기</button>
     </div>
   </div>
 </template>

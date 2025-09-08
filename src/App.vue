@@ -1,6 +1,6 @@
 <template>
 
-  <modal1 :products="products" :number="number" :modalVisible="modalVisible"/>
+  <modal1 @close="hideModal()" :products="products" :number="number" :modalVisible="modalVisible"/>
 
   <div class="menu">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
@@ -9,7 +9,11 @@
   원룸샵
   <Discount/>
 
-    <Card v-for="(product,i) in products" :key="i" :product="product" :number="i"/>
+   <!-- 방법1. 자식 -> $emit('작명', 데이터) -> 부모 ($event)로 꺼내 쓸수 있음.-->
+<!--  <Card @openModal="showModal($event)" v-for="(product,i) in products" :key="i" :product="product" :number="i"/>-->
+
+<!--  방법2. 여기서 그냥 i 보내.-->
+  <Card @openModal="showModal($event)" v-for="(product,i) in products" :key="i" :product="product" :number="i"/>
 
 
 
