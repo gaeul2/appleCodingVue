@@ -1,9 +1,11 @@
 <template>
 
-  <modal1 @closeModal="hideModal()" :products="products" :number="number" :modalVisible="modalVisible"
-          @dataMonth-idx="multiply($event)"/>
+  <transition name="fade">
+    <modal1 @closeModal="hideModal()" :products="products" :number="number" :modalVisible="modalVisible"
+            @dataMonth-idx="multiply($event)"/>
+  </transition>
 
-  <div class="menu">
+  <div class="menu" :class="{ end : modalVisible }">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
   </div>
 
@@ -119,4 +121,26 @@ export default {
     color : white;
     padding : 10px;
   }
+
+  .start{
+    opacity: 0;
+    transition : all 5s;
+  }
+  .end {
+    opacity : 1;
+  }
+
+  .fade-enter-from {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    transition: all 0.5s;
+  }
+  .fade-enter-to {
+    opacity: 1;
+  }
+
+  .fade-leave-from { opacity: 1;}
+  .fade-leave-active { transition: all 0.5s}
+  .fade-leave-to {opacity: 0;}
 </style>
