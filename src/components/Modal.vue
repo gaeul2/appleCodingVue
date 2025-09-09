@@ -27,6 +27,21 @@ export default {
       this.month = month;
       this.$emit('dataMonth-idx', {month : month, idx : this.number, oriPrice : this.originPrice})
     }
+  },
+  watch : {
+    month(a,b){
+      console.log( typeof(a));
+      if ( a >= 13){
+        alert("13개월 이상 입력하실 수 없습니다.");
+        this.month = 1;
+
+      }
+
+      if ( !Number(a.trim()) ){
+        alert("숫자를 입력해 주세요");
+        this.month = 1;
+      }
+    }
   }
 }
 </script>
