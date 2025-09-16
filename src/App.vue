@@ -5,6 +5,7 @@
             @dataMonth-idx="multiply($event)"/>
   </transition>
 
+
   <div class="menu" :class="{ end : modalVisible }">
     <a v-for="(menu, i) in 메뉴들" :key="menu">{{i+1}}번째 메뉴 : {{ menu }}</a>
   </div>
@@ -12,11 +13,17 @@
   원룸샵
   <Discount/>
 
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="priceSortDesc">가격역순정렬</button>
+  <button @click="priceSortWord">가나다순정렬</button>
+  <button @click="sortBack">되돌리기</button>
+
    <!-- 방법1. 자식 -> $emit('작명', 데이터) -> 부모 ($event)로 꺼내 쓸수 있음.-->
 <!--  <Card @openModal="showModal($event)" v-for="(product,i) in products" :key="i" :product="product" :number="i"/>-->
 
 <!--  방법2. 여기서 그냥 i 보내.-->
   <Card @openModal="showModal($event)" v-for="(product,i) in products" :key="i" :product="product" :number="i"/>
+
 
 
 
@@ -40,7 +47,8 @@ export default {
       클래스 : 'test-class',
       // products : [ {'title' : '역삼동원룸', 'price' : 60, '신고수': 0}, {'title' :'천호동원룸', 'price' : 70, '신고수': 0}, {'title' :'마포구원룸', 'price' : 80, '신고수': 0 }],
       // products : data,
-      products : productInfo,
+      products : [...productInfo],
+      oriProducts : productInfo,
       메뉴들 : ['Home', 'Shop', 'About'],
       modalVisible : false,
       modalContent : '',
@@ -67,7 +75,27 @@ export default {
     },
     multiply(test){
       this.products[test.idx].price = test.oriPrice * test.month;
+    },
+    priceSort(){
+      this.products.sort(function(a, b){
+        return a.price - b.price
+      });
+    },
+    sortBack(){
+      this.products = [...this.oriProducts]
+    },
+    priceSortWord(){
+      this.products.sort(function(a,b){
+        return a.title.localeCompare(b.title)
+      });
+    },
+    priceSortDesc(){
+      this.products.sort(function (a,b){
+        return b.price - a.price
+      })
+
     }
+
   },
   components : {
     Card,
