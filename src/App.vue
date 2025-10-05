@@ -11,7 +11,7 @@
   </div>
 
   원룸샵
-  <Discount/>
+  <Discount v-if="showDiscount == true" :showDiscount="showDiscount" :discountNum = discountNum />
 
   <button @click="priceSort">가격순정렬</button>
   <button @click="priceSortDesc">가격역순정렬</button>
@@ -42,6 +42,8 @@ export default {
   name : 'App',
   data(){
     return {
+      discountNum : 20,
+      showDiscount : true,
       스타일 : 'color : blue',
       검정 : 'color:black',
       클래스 : 'test-class',
@@ -101,6 +103,13 @@ export default {
     Card,
     Discount,
     modal1 : Modal,
+  },
+  mounted() {
+    setInterval(()=>{
+      if (this.discountNum > 0 ){
+        this.discountNum--;
+      }
+    }, 1000)
   }
 }
 </script>

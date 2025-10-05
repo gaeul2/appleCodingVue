@@ -2,6 +2,7 @@
 import Discount from "@/components/Discount.vue";
 import {productInfo} from "@/data/oneroom.js";
 import app from "@/App.vue";
+import {onBeforeUpdate} from "vue";
 
 export default {
   name: "Modal",
@@ -42,8 +43,17 @@ export default {
         this.month = 1;
       }
     }
+  },
+  updated(){
+    console.log(this.month)
+    if (this.month === '2' ){
+      alert("2개월은 선택하실수 없습니다.\n1개월 혹은 3개월이상으로 입력해주세요.");
+      this.month = 1;
+    }
   }
 }
+
+
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script>
 import app from "@/App.vue";
+import {onBeforeUpdate} from "vue";
 
 export default {
   name: "ProductList",
@@ -19,6 +20,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <template>
